@@ -35,4 +35,14 @@ public class CheckTokenFilter {
     public R byTemplate(@RequestParam Map<String, Object> params){
         return authServiceByTemplate.byTemplate(params);
     }
+
+    @GetMapping("/byBalancer")
+    public R byBalancer(@RequestParam Map<String, Object> params){
+        return authServiceByTemplate.byBalancer(params);
+    }
+
+    @GetMapping("/byBalancerBetter")
+    public R byBalancerBetter(@RequestParam Map<String, Object> params){
+        return authServiceByTemplate.byBalancerBetter(params);
+    }
 }
