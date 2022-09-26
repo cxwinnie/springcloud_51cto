@@ -19,11 +19,12 @@ public class AuthController {
     }
 
     @PostMapping("/hasPermission")
-    public R hasPermissionByPost(@RequestBody Map<String, Object> params) {
+    public R hasPermissionByPost(@RequestBody Map<String, Object> params) throws InterruptedException {
         Object token = params.get("token");
         if (token != null && token.toString().length() > 5) {
             return R.ok("验证成功");
         }
+        Thread.sleep(2000);
         return R.error("验证失败");
     }
 

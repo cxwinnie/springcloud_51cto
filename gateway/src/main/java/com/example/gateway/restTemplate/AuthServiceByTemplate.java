@@ -2,6 +2,7 @@ package com.example.gateway.restTemplate;
 
 import com.example.common.R;
 import com.example.common.ServiceName;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -38,4 +39,14 @@ public class AuthServiceByTemplate {
         return restTemplate.postForObject(url, params, R.class);
     }
 
+    @HystrixCommand(fallbackMethod = "getError")
+    public R byHystrix(@RequestParam Map<String, Object> params){
+        // restTemplate对象必须要有@LoadBalanced注解，否则调用会提示找不到服务
+        String url = String.format("http://%s/auth/hasPermission", ServiceName.SERVICE_AUTH);
+        return restTemplate.postForObject(url, params, R.class);
+    }
+
+    public R getError(@RequestParam Map<String, Object> params){
+        return R.error("服务正忙，请稍后");
+    }
 }

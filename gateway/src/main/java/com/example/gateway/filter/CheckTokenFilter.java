@@ -45,4 +45,9 @@ public class CheckTokenFilter {
     public R byBalancerBetter(@RequestParam Map<String, Object> params){
         return authServiceByTemplate.byBalancerBetter(params);
     }
+
+    @GetMapping("/byHystrix")
+    public R byHystrix(@RequestParam Map<String, Object> params){
+        return authServiceByTemplate.byHystrix(params);
+    }
 }
