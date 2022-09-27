@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
-@FeignClient(name = ServiceName.SERVICE_AUTH)
+@FeignClient(name = ServiceName.SERVICE_AUTH, fallback = AuthServiceHystrix.class)
 public interface AuthServiceByFeign {
 
     @GetMapping("auth/hasPermission")

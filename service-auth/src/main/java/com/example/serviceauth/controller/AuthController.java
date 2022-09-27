@@ -24,6 +24,7 @@ public class AuthController {
         if (token != null && token.toString().length() > 5) {
             return R.ok("验证成功");
         }
+        // throw new RuntimeException("123"); 也会触发熔断器
         Thread.sleep(2000);
         return R.error("验证失败");
     }
