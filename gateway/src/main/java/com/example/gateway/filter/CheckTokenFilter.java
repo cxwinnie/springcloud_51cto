@@ -1,6 +1,7 @@
 package com.example.gateway.filter;
 
 import com.example.common.R;
+import com.example.gateway.feign.AuthServiceByFeign;
 import com.example.gateway.httpClient.AuthServiceByHttp;
 import com.example.gateway.restTemplate.AuthServiceByTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CheckTokenFilter {
 
     @Autowired
     AuthServiceByTemplate authServiceByTemplate;
+
+    @Autowired
+    AuthServiceByFeign authServiceByFeign;
 
     @GetMapping("/byHttpGet")
     public R byHttpGet(@RequestParam Map<String, Object> params){
@@ -49,5 +53,15 @@ public class CheckTokenFilter {
     @GetMapping("/byHystrix")
     public R byHystrix(@RequestParam Map<String, Object> params){
         return authServiceByTemplate.byHystrix(params);
+    }
+
+    @GetMapping("/byFeignGet")
+    public R byFeignGet(@RequestParam Map<String, Object> params){
+        return authServiceByFeign.byFeignGet(params);
+    }
+
+    @GetMapping("/byFeignPost")
+    public R byFeignPost(@RequestParam Map<String, Object> params){
+        return authServiceByFeign.byFeignPost(params);
     }
 }
