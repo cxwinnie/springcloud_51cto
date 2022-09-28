@@ -31,6 +31,9 @@ hystrix:
 feign:
   circuitbreaker:
     enabled: true
+  sentinel:
+    enabled: true
+
 
 ribbon:
   # 指的是建立连接后从服务器读取到可用资源所用的时间, 默认为1秒 超过1秒没有读取到内容时，就认为此次读取不到内容并抛出Java.net.SocketException: read time out的异常

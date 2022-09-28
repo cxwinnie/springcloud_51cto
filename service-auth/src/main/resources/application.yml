@@ -1,11 +1,39 @@
 spring:
   application:
     name: service-auth
+  main:
+    allow-circular-references: true
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8010
+      web-context-unify: false # 调用链树展开
+      datasource:
+          # 名称仅起标识作用，可以是任意的
+          flow-rule:
+            #支持多种持久化数据源：file、nacos、zk、apollo、redis、consul
+            nacos:
+              # nacos服务地址
+              server-addr: localhost:8841
+              # 命名空间，根据环境配置
+              namespace: public
+              # 这里我做了一下细分，不同规则设置不同groupId
+              group-id: SENTINEL_GROUP
+              # 仅支持JSON和XML类型
+              data-id: ${spring.application.name}-flow-rules.json
+              # 规则类型：flow、degrade、param-flow、system、authority
+              rule-type: flow
+              # nacos开启了认证需要配置username、password
+              # username: nacos
+              # password: nacos
+    nacos:
+      discovery:
+        server-addr: localhost:8841,localhost:8843,localhost:8845
 server:
-  port: 8082
+  port: 8081
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka,http://localhost:8762/eureka,http://localhost:8763/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka,http://localhost:8762/eureka,http://localhost:8763/eureka
 
