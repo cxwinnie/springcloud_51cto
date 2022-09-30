@@ -1,0 +1,39 @@
+
+server:
+  port: 9000
+
+spring:
+  application:
+    name: service-gateway-v2
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8841
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # http://127.0.0.1:9000/auth/auth/hasPermission?token=123
+        - id: path_route_2service
+          predicates:
+            - Path=/auth/**
+            - Method=GET
+#          uri: http://localhost:8081
+          uri: lb://service-auth
+          filters:
+            - StripPrefix=1
+        - id: query_route_to_163
+          predicates:
+            - Query=userid, \d+
+          uri: https://163.com
+logging:
+  level:
+    root: debug
+
+# http://localhost:9000/actuator/gateway/routes 查看路由策略
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
