@@ -27,6 +27,9 @@ spring:
           predicates:
             - Query=userid, \d+
           uri: https://163.com
+  redis:
+    host: localhost
+    port: 6379
 logging:
   level:
     root: debug
