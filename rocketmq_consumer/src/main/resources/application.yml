@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: rocketmq_consumer
+  cloud:
+    stream:
+      bindings:
+        TopicEmail:
+          group: GroupEmail
+
+server:
+  port: 8072
+
+

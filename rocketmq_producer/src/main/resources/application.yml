@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: rocketmq_producer
+
+server:
+  port: 8071
