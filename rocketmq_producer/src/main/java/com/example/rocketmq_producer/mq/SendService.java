@@ -1,5 +1,6 @@
 package com.example.rocketmq_producer.mq;
 
+import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -20,8 +21,11 @@ public class SendService {
     @GetMapping("/send")
     public String send(@RequestParam Map<String, Object> params) {
         String msg = params.get("msg").toString();
-        Message<String> message = MessageBuilder.withPayload(msg).build();
-        channels.TopicEmail().send(message);
+        Message<String> message = MessageBuilder.withPayload(msg)
+                .setHeader(RocketMQHeaders.TAGS,"tag1")
+                .setHeader(RocketMQHeaders.KEYS,"key3")  //改成key3就不会被接收到消息
+                .build();
+        channels.producerChannelEmail().send(message);
 
         return "OK";
     }

@@ -5,6 +5,6 @@ import org.springframework.messaging.MessageChannel;
 
 public interface Channels {
 
-    @Output("TopicEmail")
-    MessageChannel TopicEmail();
+    @Output("producerChannelEmail")
+    MessageChannel producerChannelEmail();
 }

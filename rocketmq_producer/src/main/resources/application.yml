@@ -1,6 +1,14 @@
 spring:
   application:
     name: rocketmq_producer
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9877
+      bindings:
+        producerChannelEmail:
+          destination: TopicEmail
 
 server:
   port: 8071

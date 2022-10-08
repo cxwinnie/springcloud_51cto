@@ -6,5 +6,5 @@ import org.springframework.messaging.SubscribableChannel;
 public interface Channels {
 
     @Input
-    SubscribableChannel TopicEmail();
+    SubscribableChannel consumerChannelEmail();
 }

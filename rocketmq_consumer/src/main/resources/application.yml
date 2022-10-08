@@ -4,8 +4,16 @@ spring:
   cloud:
     stream:
       bindings:
-        TopicEmail:
+        consumerChannelEmail:
+          destination: TopicEmail
           group: GroupEmail
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9877
+        bindings:
+          consumerChannelEmail:
+            tags: tag1
+            keys: key1||key2
 
 server:
   port: 8072
